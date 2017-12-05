@@ -1,0 +1,28 @@
+{
+  "name": "rodneyr_bamzon",
+  "version": "1.0.0",
+  "description": "mock amaozon homework assignment designed to show understandinig of mysql and callbacks",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/unboundedimages/RodneyR_Bamazon.git"
+  },
+  "keywords": [
+    "bamazon"
+  ],
+  "author": "Rodney Ross",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/unboundedimages/RodneyR_Bamazon/issues"
+  },
+  "homepage": "https://github.com/unboundedimages/RodneyR_Bamazon#readme",
+  "dependencies": {
+    "inquire": "^0.4.8",
+    "inquirer": "^4.0.1",
+    "mysql": "^2.15.0",
+    "require": "^2.4.20"
+  }
+}
