@@ -51,35 +51,32 @@ function numberTwo(res) {
 
     },
     {
-      //this is the more effeciant way.
       name: "quantity",
       type: "input",
-      message: "How many are you buying?",
-      validate: function(value) {
-        if (isNaN(value) === false) {
-          return true;
-        }
-        console.log("  please enter a Numeric number i.e 1 2 3 and not one two three");
-        return false;
-      }
-    }
-  ]);
-  // ]).then(function(answer) {
+      message: "How many are you buying?"
+    },
+  ]).then(function(answer) {
 
-  //   // console.log(answer);
-  //   //this is the pretty way to display it.
-  //   if (isNaN(parseInt(answer.quantity))) {
-  //     // !== parseInt(answer.quantity)) {
-  //     // return false
-  //     console.log("\n-----------------------------------||\n");
-  //     console.log("Only numeric entries are accepted. ||");
-  //     console.log("\n-----------------------------------||\n");
-  //     console.log("\n------------------||\n");
-  //     console.log("Please try again. ||");
-  //     console.log("\n------------------||\n");
-  //     numberTwo(res)
-  //   }
-  // })
-  // //next step is to take the amount chosen and multiply it by the price.
+    // console.log(answer);
+    if (isNaN(parseInt(answer.quantity))) {
+      // !== parseInt(answer.quantity)) {
+      // return false
+      console.log("\n-----------------------------------||\n");
+      console.log("Only numeric entries are accepted. ||");
+      console.log("\n-----------------------------------||\n");
+      console.log("\n------------------||\n");
+      console.log("Please try again. ||");
+      console.log("\n------------------||\n");
+      numberTwo(res)
+    }
+
+
+
+    // console.log(answer.quantity * res.price)
+    // return choiceArray;
+  }).then(function(x, y) {
+    return answer.quantity * res[i].price;
+  })
+  //next step is to take the amount chosen and multiply it by the price.
 
 }
