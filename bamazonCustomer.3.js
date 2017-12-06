@@ -37,27 +37,21 @@ function afterConnection() {
 
 function numberTwo(res) {
   inquirer.prompt([{
-      name: "name",
-      type: "list",
-      message: "Choose me",
-      choices: function() {
-        var choiceArray = [];
-        for (var i = 0; i < res.length; i++) {
-          choiceArray.push(res[i].id_item + "-" + res[i].product_name)
-        }
-        // console.log(choiceArray)
-        return choiceArray;
+    name: "name",
+    type: "list",
+    message: "Choose me",
+    choices: function() {
+      var choiceArray = [];
+      for (var i = 0; i < res.length; i++) {
+        choiceArray.push(res[i].id_item + "-" + res[i].product_name)
       }
-
-    },
-    {
-      name: "quanity",
-      type: "input",
-      message: "How many are you buying?"
+      // console.log(choiceArray)
+      return choiceArray;
     }
-  ]).then(function(inquireRepsonse) {
 
-    console.log(inquireRepsonse);
+  }]).then(function(inquireRepsonse) {
+
+    console.log("test")
   })
 
   //next step is to take the number selected and then ask the quantity of the product selected.
