@@ -39,7 +39,7 @@ function numberTwo(res) {
   inquirer.prompt([{
       name: "name",
       type: "list",
-      message: "Choose me",
+      message: "Select your item and press enter",
       choices: function() {
         var choiceArray = [];
         for (var i = 0; i < res.length; i++) {
@@ -51,15 +51,22 @@ function numberTwo(res) {
 
     },
     {
-      name: "quanity",
+      name: "quantity",
       type: "input",
       message: "How many are you buying?"
     }
-  ]).then(function(inquireRepsonse) {
+  ]).then(function(answer) {
 
-    console.log(inquireRepsonse);
+    // console.log(answer);
+    if (isNaN(parseInt(answer.quantity))) {
+
+      // !== parseInt(answer.quantity)) {
+      // return false
+      console.log("Please enter a number and try again")
+      numberTwo(res)
+    }
   })
 
-  //next step is to take the number selected and then ask the quantity of the product selected.
+  //next step is to take the amount chosen and multiply it by the price.
 
 }
