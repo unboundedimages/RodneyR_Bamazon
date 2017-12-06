@@ -43,7 +43,7 @@ function numberTwo(res) {
       choices: function() {
         var choiceArray = [];
         for (var i = 0; i < res.length; i++) {
-          choiceArray.push(res[i].id_item + "-" + res[i].product_name)
+          choiceArray.push(res[i].id_item + "-" + res[i].product_name + "-" + res[i].price.toFixed(2))
         }
         // console.log(choiceArray)
         return choiceArray;
@@ -63,22 +63,17 @@ function numberTwo(res) {
         return false;
       }
     }
-  ]);
-  // ]).then(function(answer) {
-
-  //   // console.log(answer);
-  //   //this is the pretty way to display it.
-  //   if (isNaN(parseInt(answer.quantity))) {
-  //     // !== parseInt(answer.quantity)) {
-  //     // return false
-  //     console.log("\n-----------------------------------||\n");
-  //     console.log("Only numeric entries are accepted. ||");
-  //     console.log("\n-----------------------------------||\n");
-  //     console.log("\n------------------||\n");
-  //     console.log("Please try again. ||");
-  //     console.log("\n------------------||\n");
-  //     numberTwo(res)
-  //   }
+  ])
+  // .then(function(answer, res[i].price) {
+  //   var total;
+  //   return answer * res[i].price;
+  //   // var chosenQuantity;
+  //   // for (var i = 0; i < res.length; i++) {
+  //   //   if (res[i].price * answer.choice) {
+  //   //     chosenQuantity = res[i];
+  //   //   }
+  //   //   console.log(chosenQuantity);
+  //   // }
   // })
   // //next step is to take the amount chosen and multiply it by the price.
 
