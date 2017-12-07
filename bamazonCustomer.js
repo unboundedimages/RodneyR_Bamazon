@@ -15,7 +15,7 @@ connection.connect(function(err) {
   console.log("connected as id " + connection.threadId);
   // connection.end();
   afterConnection();
-  connection.end();
+  // connection.end();
 });
 
 function afterConnection() {
@@ -72,11 +72,14 @@ function numberTwo(res) {
         if (res[i].product_name == answer.name) {
           dbItem = res[i];
         }
-
+        // console.log(dbItem.stock_quantity)
+        // console.log(answer.quantity)
         // console.log(res[i].price.toFixed(2))
         // var money = res[i].price.toFixed(2);
         // dollar.push(parseInt(res[i].price.toPrecision(6)))
       }
+      var newPodQty = dbItem.product_name;
+      var newUnitVol = dbItem.stock_quantity - answer.quantity;
       var total = answer.quantity * dbItem.price.toFixed(2);
       console.log(total);
       // console.log(dollar);
@@ -94,7 +97,19 @@ function numberTwo(res) {
       // if (res[i].price * answer.quantity) {
       //   total = res[i].price;
       // }
+      updateProduct(newUnitVol, newPodQty)
     })
   // //next step is to update the units/stock quantity in the database.
-
+  function updateProduct(newUnitVol, newPodQty) {
+    console.log("updating db");
+    var query = connection.query(
+      "UPDATE products SET ? WHERE ?", [{
+          stock_quantity: newUnitVol
+        },
+        {
+          product_name: newPodQty
+        }
+      ]
+    )
+  }
 }
