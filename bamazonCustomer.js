@@ -37,44 +37,64 @@ function afterConnection() {
 
 function numberTwo(res) {
   inquirer.prompt([{
-      name: "name",
-      type: "list",
-      message: "Select your item and press enter",
-      choices: function() {
-        var choiceArray = [];
-        for (var i = 0; i < res.length; i++) {
-          choiceArray.push(res[i].id_item + "-" + res[i].product_name + "-" + res[i].price.toFixed(2))
+        name: "name",
+        type: "list",
+        message: "Select your item and press enter",
+        choices: function() {
+          var choiceArray = [];
+          for (var i = 0; i < res.length; i++) {
+            choiceArray.push(res[i].product_name)
+          }
+          // console.log(choiceArray)
+          return choiceArray;
         }
-        // console.log(choiceArray)
-        return choiceArray;
-      }
 
-    },
-    {
-      //this is the more effeciant way.
-      name: "quantity",
-      type: "input",
-      message: "How many are you buying?",
-      validate: function(value) {
-        if (isNaN(value) === false) {
-          return true;
+      },
+      {
+        //this is the more effeciant way.
+        name: "quantity",
+        type: "input",
+        message: "How many are you buying?",
+        validate: function(value) {
+          if (isNaN(value) === false) {
+            return true;
+          }
+          console.log("  please enter a Numeric number i.e 1 2 3 and not one two three");
+          return false;
         }
-        console.log("  please enter a Numeric number i.e 1 2 3 and not one two three");
-        return false;
       }
-    }
-  ])
-  // .then(function(answer, res[i].price) {
-  //   var total;
-  //   return answer * res[i].price;
-  //   // var chosenQuantity;
-  //   // for (var i = 0; i < res.length; i++) {
-  //   //   if (res[i].price * answer.choice) {
-  //   //     chosenQuantity = res[i];
-  //   //   }
-  //   //   console.log(chosenQuantity);
-  //   // }
-  // })
-  // //next step is to take the amount chosen and multiply it by the price.
+    ])
+    .then(function(answer) {
+      // var i = res.length
+      answer.quantity = parseInt(answer.quantity)
+      var dbItem = {};
+      for (var i = 0; i < res.length; i++) {
+        if (res[i].product_name == answer.name) {
+          dbItem = res[i];
+        }
+
+        // console.log(res[i].price.toFixed(2))
+        // var money = res[i].price.toFixed(2);
+        // dollar.push(parseInt(res[i].price.toPrecision(6)))
+      }
+      var total = answer.quantity * dbItem.price.toFixed(2);
+      console.log(total);
+      // console.log(dollar);
+      // console.log(answer)
+      // if (isNaN(parseInt(answer.name.price))) {
+      //   console.log("it's a number")
+      // }
+      // else {
+      //   console.log("it is not");
+      // }
+      // // var todos = answer.name
+      // console.log(answer.name)
+      // console.log(answer)
+      // console.log(answer.quantity);
+      // if (res[i].price * answer.quantity) {
+      //   total = res[i].price;
+      // }
+    })
+  // //next step is to update the units/stock quantity in the database.
 
 }
