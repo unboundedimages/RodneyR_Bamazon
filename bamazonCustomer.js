@@ -106,6 +106,22 @@ function updateProduct(newUnitVol, newPodQty) {
   ], function(err, resp) {
     if (err) console.log(err);
     // console.log(resp);
-    console.log("would you like to purchase another item?");
+
+    buyORbye()
   });
+}
+
+function buyORbye() {
+  // console.log("would you like to purchase another item?");
+  inquirer.prompt({
+    name: "buyORbYe",
+    type: "rawlist",
+    message: "Would you like to but [BUY] something else or [END] your transaction?",
+    choices: ["BUY", "END"]
+  }).then(function(answer) {
+    if (answer.buyORbYe.toUpperCase() === "BUY") {
+      afterConnection()
+    };
+
+  })
 }
