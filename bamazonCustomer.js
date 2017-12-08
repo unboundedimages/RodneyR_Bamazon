@@ -24,10 +24,11 @@ function afterConnection() {
     numberTwo(res);
   });
   // connection.end();
-  
+  // afterConnection()
 }
 
 function numberTwo(res) {
+  // afterConnection()
   inquirer.prompt([{
         type: "list",
         message: "Select your item and press enter",
@@ -39,7 +40,9 @@ function numberTwo(res) {
             choiceArray.push(res[i].id_item + "  " + res[i].product_name + " $ " + res[i].price.toFixed(2))
           }
           return choiceArray;
+
         }
+
       },
       {
         name: "quantity",
@@ -55,23 +58,38 @@ function numberTwo(res) {
       }
     ])
     .then(function(answer) {
-      connection.query("SELECT * FROM products", function(err, res) {
-        if (err) throw err; // var i = res.length
-        answer.quantity = (answer.quantity)
-        var dbItem = {};
-        for (var i = 0; i < res.length; i++) {
-          if (answer.items.indexOf(res[i].product_name) >= 0) {
-            dbItem = res[i];
-          }
-        }
-        var newPodQty = dbItem.product_name;
-        var newUnitVol = dbItem.stock_quantity - (answer.quantity);
-        var total = (answer.quantity) * dbItem.price.toFixed(2);
-        console.log("Your total is: $" + total.toFixed(2));
-        updateProduct(newUnitVol, newPodQty);
-        // call to start over
+      // afterConnection()
 
-      });
+      connection.query(
+        "SELECT * FROM products",
+        function(err, res) {
+          if (err) throw err;
+
+          var dbItem;
+
+          // find the item with a matching name
+          for (var i = 0; i < res.length; i++) {
+            if (answer.items.indexOf(res[i].product_name) >= 0) {
+              dbItem = res[i];
+            }
+          }
+
+          // if we found a match
+          if (dbItem) {
+            if (dbItem.stock_quantity < 0) {
+              console.log("insufficent stock")
+              numberTwo(res);
+            }
+            else {
+              var newPodQty = dbItem.product_name;
+              var newUnitVol = dbItem.stock_quantity - (answer.quantity);
+              var total = (answer.quantity) * dbItem.price.toFixed(2);
+              console.log("Your total is: $" + total.toFixed(2));
+              updateProduct(newUnitVol, newPodQty);
+            }
+
+          }
+        });
 
     });
 }
@@ -88,5 +106,6 @@ function updateProduct(newUnitVol, newPodQty) {
   ], function(err, resp) {
     if (err) console.log(err);
     // console.log(resp);
+    console.log("would you like to purchase another item?");
   });
 }
